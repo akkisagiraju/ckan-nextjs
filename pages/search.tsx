@@ -7,6 +7,7 @@ import Form from '../components/search/Form';
 import Total from '../components/search/Total';
 import List from '../components/search/List';
 import { SEARCH_QUERY } from '../graphql/queries';
+import Pagination from '../components/search/Pagination';
 
 type Props = {
   variables: any;
@@ -23,6 +24,7 @@ const Search: React.FC<Props> = ({ variables }) => (
       <Form />
       <Total variables={variables} />
       <List variables={variables} />
+      <Pagination />
     </main>
   </div>
 );
