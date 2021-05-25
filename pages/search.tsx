@@ -13,7 +13,7 @@ type Props = {
 };
 
 const Search: React.FC<Props> = ({ variables }) => (
-  <>
+  <div className="container mx-auto">
     <Head>
       <title>Portal | Search</title>
       <link rel="icon" href="/favicon.ico" />
@@ -24,7 +24,7 @@ const Search: React.FC<Props> = ({ variables }) => (
       <Total variables={variables} />
       <List variables={variables} />
     </main>
-  </>
+  </div>
 );
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

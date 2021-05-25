@@ -15,7 +15,7 @@ const Dataset: React.FC<{ variables: any }> = ({ variables }) => {
   const { result } = data.dataset;
 
   return (
-    <>
+    <div className="container mx-auto">
       <Head>
         <title>Portal | {result.title || result.name}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -29,7 +29,7 @@ const Dataset: React.FC<{ variables: any }> = ({ variables }) => {
         <About variables={variables} />
         <Resources variables={variables} />
       </main>
-    </>
+    </div>
   );
 };
 

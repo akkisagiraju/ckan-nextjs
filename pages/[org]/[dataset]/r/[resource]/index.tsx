@@ -17,11 +17,8 @@ const Resource: React.FC<{ variables: any }> = ({ variables }) => {
     (item) => item.name === variables.resource
   );
 
-  console.log(resource.format);
-  console.log(variables);
-
   return (
-    <>
+    <div className="container mx-auto">
       <Head>
         <title>Portal | {resource.title || resource.name}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -43,7 +40,7 @@ const Resource: React.FC<{ variables: any }> = ({ variables }) => {
           <DataExplorer variables={variables} />
         )}
       </main>
-    </>
+    </div>
   );
 };
 
