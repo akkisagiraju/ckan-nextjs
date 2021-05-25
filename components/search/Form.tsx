@@ -5,12 +5,15 @@ const Form: React.FC = () => {
   const router = useRouter();
   const [q, setQ] = useState(router.query.q);
   const [sort, setSort] = useState(router.query.sort);
+  const [size, setSize] = useState(router.query.size);
 
   const handleChange = (event) => {
     if (event.target.name === 'q') {
       setQ(event.target.value);
     } else if (event.target.name === 'sort') {
       setSort(event.target.value);
+    } else if (event.target.name === 'size') {
+      setSize(event.target.value);
     }
   };
 
@@ -18,7 +21,7 @@ const Form: React.FC = () => {
     event.preventDefault();
     router.push({
       pathname: '/search',
-      query: { q, sort },
+      query: { q, sort, size },
     });
   };
 
@@ -40,6 +43,21 @@ const Form: React.FC = () => {
         >
           Search
         </button>
+      </div>
+      <div className="inline-block my-6">
+        <label htmlFor="field-order-by">Items per page:</label>
+        <select
+          className="bg-white"
+          id="field-order-by"
+          name="size"
+          onChange={handleChange}
+          onBlur={handleChange}
+          value={sort}
+        >
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
       </div>
       <div className="inline-block my-6 float-right">
         <label htmlFor="field-order-by">Order by:</label>
