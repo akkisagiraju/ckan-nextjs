@@ -26,7 +26,7 @@ module.exports = (phase, { defaultConfig }) => {
 
     return {
       i18n: {
-        locales: ['en', 'fr', 'nl-NL'],
+        locales: ['en', 'fr', 'nl-NL', 'te'],
         defaultLocale: 'en',
       },
       publicRuntimeConfig: {
@@ -37,7 +37,7 @@ module.exports = (phase, { defaultConfig }) => {
   }
   return {
     i18n: {
-      locales: ['en', 'fr', 'nl-NL'],
+      locales: ['en', 'fr', 'nl-NL', 'te'],
       defaultLocale: 'en',
     },
     publicRuntimeConfig: {
