@@ -6,10 +6,7 @@ export default class CustomDocument extends Document {
     return (
       <Html>
         <Head>
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-NX72GYFHFS"
-          />
+          <script async src="https://www.googletagmanager.com/gtag/js?id=" />
           <script
             dangerouslySetInnerHTML={{
               __html: `
