@@ -1,19 +1,9 @@
-<h1 align="center">
+# ckan-nextjs
 
-🌀 Portal.JS<br/>
-The javascript framework for<br/>
-data portals
-
-</h1>
-
-🌀 `Portal` is a framework for rapidly building rich data portal frontends using a modern frontend approach (javascript, React, SSR).
-
-`Portal` assumes a "decoupled" approach where the frontend is a separate service from the backend and interacts with backend(s) via an API. It can be used with any backend and has out of the box support for [CKAN][]. `portal` is built in Javascript and React on top of the popular [Next.js][] framework.
+`ckan-nextjs` assumes a "decoupled" approach where the frontend is a separate service from the backend and interacts with backend(s) via an API.
 
 [ckan]: https://ckan.org/
 [next.js]: https://nextjs.com/
-
-Live DEMO: https://portal.datopian1.now.sh
 
 ## Features
 
@@ -38,17 +28,9 @@ Live DEMO: https://portal.datopian1.now.sh
 
 Install a recent version of Node. You'll need Node 10.13 or later.
 
-### Create a Portal app
+This project uses `yarn` as the package manager. Install it by running:
 
-To create a Portal app, open your terminal, cd into the directory you'd like to create the app in, and run the following command:
-
-```console
-npm init portal-app my-data-portal
-```
-
-> NB: Under the hood, this uses the tool called create-next-app, which bootstraps a Next.js app for you. It uses this template through the --example flag.
->
-> If it doesn’t work, please open an issue.
+`npm install -g yarn`
 
 ## Guide
 
@@ -96,15 +78,13 @@ TODO
 
 We use Apollo client which allows us to query data with GraphQL. We have setup CKAN API for the demo (it uses demo.ckan.org as DMS):
 
-http://portal.datopian1.now.sh/
-
 Note that we don't have Apollo Server but we connect CKAN API using [`apollo-link-rest`](https://www.apollographql.com/docs/link/links/rest/) module. You can see how it works in [lib/apolloClient.ts](https://github.com/datopian/portal/blob/master/lib/apolloClient.ts) and then have a look at [pages/\_app.tsx](https://github.com/datopian/portal/blob/master/pages/_app.tsx).
 
 For development/debugging purposes, we suggest installing the Chrome extension - https://chrome.google.com/webstore/detail/apollo-client-developer-t/jdkknkkbebbapilgoeccciglkfbmbnfm.
 
 #### i18n configuration
 
-Portal.js is configured by default to support both `English` and `French` subpath for language translation. But for subsequent users, this following steps can be used to configure i18n for other languages;
+This is configured by default to support both `English` and `French` subpath for language translation. But for subsequent users, this following steps can be used to configure i18n for other languages;
 
 1.  Update `next.config.js`, to add more languages to the i18n locales
 
@@ -301,6 +281,6 @@ yarn run e2e
 - Framework: NextJS - https://nextjs.org/
 - Data layer API: GraphQL using Apollo. So controllers access data using GraphQL “gatsby like”
 
-### Key Pages
+## Credits
 
-See https://tech.datopian.com/frontend/
+This is based on a [PortalJS](https://github.com/datopian/portal.js) example by [Datopian](https://www.datopian.com/).
