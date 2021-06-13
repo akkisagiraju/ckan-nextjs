@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { initializeApollo } from '../lib/apolloClient';
+import { useQuery } from '@apollo/react-hooks';
 import utils from '../utils';
 import Head from 'next/head';
 import Nav from '../components/home/Nav';
@@ -13,21 +14,33 @@ type Props = {
   variables: any;
 };
 
-const Search: React.FC<Props> = ({ variables }) => (
-  <div className="container mx-auto">
-    <Head>
-      <title>Portal | Search</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
-    <Nav />
-    <main className="p-6">
-      <Form />
-      <Total variables={variables} />
-      <List variables={variables} />
-      <Pagination />
-    </main>
-  </div>
-);
+const Search: React.FC<Props> = ({ variables }) => {
+  const { loading, error, data } = useQuery(SEARCH_QUERY, {
+    variables,
+    // Setting this value to true will make the component rerender when
+    // the "networkStatus" changes, so we are able to know if it is fetching
+    // more data
+    notifyOnNetworkStatusChange: true,
+  });
+
+  console.log(data);
+
+  return (
+    <div className="container mx-auto">
+      <Head>
+        <title>Portal | Search</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Nav />
+      <main className="p-6">
+        <Form />
+        <Total variables={variables} />
+        <List variables={variables} />
+        <Pagination />
+      </main>
+    </div>
+  );
+};
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const query = context.query || {};
