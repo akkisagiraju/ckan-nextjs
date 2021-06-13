@@ -8,12 +8,24 @@ const Form: React.FC = () => {
   const [size, setSize] = useState(router.query.size);
 
   const handleChange = (event) => {
-    if (event.target.name === 'q') {
-      setQ(event.target.value);
-    } else if (event.target.name === 'sort') {
-      setSort(event.target.value);
-    } else if (event.target.name === 'size') {
-      setSize(event.target.value);
+    switch (event.target.name) {
+      case 'q':
+        setQ(event.target.value);
+        break;
+      case 'sort':
+        setSort(event.target.value);
+        router.push({
+          pathname: '/search',
+          query: { q, sort: event.target.value, size },
+        });
+        break;
+      case 'size':
+        setSize(event.target.value);
+        // the input value is not getting updated in this case
+        router.push({
+          pathname: '/search',
+          query: { q, sort, size: event.target.value },
+        });
     }
   };
 
