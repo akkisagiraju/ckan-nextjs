@@ -1,17 +1,18 @@
-import { MouseEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 
 const Pagination: React.FC = () => {
   const router = useRouter();
-  const { q, sort, size, start } = router.query;
+  const { q, sort } = router.query;
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
-    console.log(event.target);
-    // router.push({
-    //   pathname: '/search',
-    //   query: { q, sort, size },
-    // });
+    const size = router.query.size ? router.query.size : '10';
+    const buttonValue = (event.target as HTMLInputElement).value;
+    const from = (parseInt(buttonValue) - 1) * parseInt(size as string);
+    router.push({
+      pathname: '/search',
+      query: { q, sort, size, from },
+    });
   };
 
   return (
@@ -22,17 +23,29 @@ const Pagination: React.FC = () => {
         </button>
       </li>
       <li className="mx-1 bg-gray-200 text-primary rounded-lg">
-        <button onClick={handleClick} className="px-3 py-2 font-bold">
+        <button
+          value={1}
+          onClick={handleClick}
+          className="px-3 py-2 font-bold"
+        >
           1
         </button>
       </li>
       <li className="mx-1 bg-gray-200 text-primary rounded-lg">
-        <button onClick={handleClick} className="px-3 py-2 font-bold">
+        <button
+          value={2}
+          onClick={handleClick}
+          className="px-3 py-2 font-bold"
+        >
           2
         </button>
       </li>
       <li className="mx-1 bg-gray-200 text-primary rounded-lg">
-        <button onClick={handleClick} className="px-3 py-2 font-bold">
+        <button
+          value={3}
+          onClick={handleClick}
+          className="px-3 py-2 font-bold"
+        >
           3
         </button>
       </li>
