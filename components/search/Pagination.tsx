@@ -6,12 +6,14 @@ const Pagination: React.FC = () => {
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
-    const size = router.query.size ? router.query.size : '10';
+    const size = router.query['facet.limit']
+      ? router.query['facet.limit']
+      : '10';
     const buttonValue = (event.target as HTMLInputElement).value;
     const from = (parseInt(buttonValue) - 1) * parseInt(size as string);
     router.push({
       pathname: '/search',
-      query: { q, sort, size, from },
+      query: { q, sort, 'facet.limit': size, from },
     });
   };
 

@@ -5,7 +5,7 @@ const Form: React.FC = () => {
   const router = useRouter();
   const [q, setQ] = useState(router.query.q);
   const [sort, setSort] = useState(router.query.sort);
-  const [size, setSize] = useState(router.query.size);
+  const [size, setSize] = useState(router.query['facet.limit']);
 
   const handleChange = (event) => {
     switch (event.target.name) {
@@ -24,7 +24,7 @@ const Form: React.FC = () => {
         // the input value is not getting updated in this case
         router.push({
           pathname: '/search',
-          query: { q, sort, size: event.target.value },
+          query: { q, sort, 'facet.limit': event.target.value },
         });
     }
   };
