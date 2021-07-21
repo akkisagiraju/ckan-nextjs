@@ -1,3 +1,5 @@
+import React from 'react';
+import { csv } from 'd3-fetch';
 import { useQuery } from '@apollo/react-hooks';
 import { ErrorMessage } from '../_shared';
 import { GET_RESOURCES_QUERY } from '../../graphql/queries';
@@ -18,6 +20,13 @@ const DataExplorer: React.FC<{ variables: any }> = ({ variables }) => {
   const resource = result.resources.find(
     (item) => item.name === variables.resource
   );
+
+  React.useEffect(() => {
+    console.log(resource.url);
+    csv(resource.url)
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error.message));
+  }, []);
 
   return <>{JSON.stringify(resource)}</>;
 };
