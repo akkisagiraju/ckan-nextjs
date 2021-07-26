@@ -7,6 +7,7 @@ import Nav from '../components/home/Nav';
 import Form from '../components/search/Form';
 import Total from '../components/search/Total';
 import List from '../components/search/List';
+import { ErrorMessage } from '../components/_shared';
 import { SEARCH_QUERY } from '../graphql/queries';
 import Pagination from '../components/search/Pagination';
 
@@ -23,7 +24,8 @@ const Search: React.FC<Props> = ({ variables }) => {
     notifyOnNetworkStatusChange: true,
   });
 
-  console.log(data);
+  if (error) return <ErrorMessage message="Error loading search results." />;
+  if (loading) return <div>Loading</div>;
 
   return (
     <div className="container mx-auto">
@@ -34,9 +36,9 @@ const Search: React.FC<Props> = ({ variables }) => {
       <Nav />
       <main className="p-6">
         <Form />
-        <Total variables={variables} />
+        <Total count={data.search.result.count} />
         <List variables={variables} />
-        <Pagination />
+        <Pagination variables={variables} />
       </main>
     </div>
   );
