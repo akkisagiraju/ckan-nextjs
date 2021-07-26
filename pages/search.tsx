@@ -36,9 +36,9 @@ const Search: React.FC<Props> = ({ variables }) => {
       <Nav />
       <main className="p-6">
         <Form />
-        <Total count={data.search.result.count} />
+        <Total total={data.search.result.count} />
         <List variables={variables} />
-        <Pagination variables={variables} />
+        <Pagination total={data.search.result.count} />
       </main>
     </div>
   );

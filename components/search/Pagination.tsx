@@ -1,13 +1,37 @@
 import { useRouter } from 'next/router';
+import React from 'react';
+import utils from '../../utils';
 
-const Pagination: React.FC = () => {
+interface IPaginationButton {
+  value: number;
+  handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+const PaginationButton: React.FC<IPaginationButton> = ({
+  value,
+  handleClick,
+}) => {
+  return (
+    <button
+      value={value}
+      onClick={handleClick}
+      className="px-3 py-2 mx-1 font-bold bg-gray-200 text-primary rounded-lg"
+    >
+      {value}
+    </button>
+  );
+};
+
+const Pagination: React.FC<{ total: number }> = ({ total }) => {
   const router = useRouter();
   const { q, sort } = router.query;
+  const [current, setCurrent] = React.useState(1);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
     const size = router.query.size ? router.query.size : '10';
     const buttonValue = (event.target as HTMLInputElement).value;
+    setCurrent(Number(buttonValue));
     const from = (parseInt(buttonValue) - 1) * parseInt(size as string);
     router.push({
       pathname: '/search',
@@ -15,46 +39,22 @@ const Pagination: React.FC = () => {
     });
   };
 
+  const paginationRange = utils.pagination(current, total);
+
   return (
-    <ul className="flex">
-      <li className="mx-1 bg-gray-200 text-gray-500 rounded-lg">
-        <button className="px-3 py-2 flex items-center font-bold">
-          <span className="mx-1">Previous</span>
-        </button>
-      </li>
-      <li className="mx-1 bg-gray-200 text-primary rounded-lg">
-        <button
-          value={1}
-          onClick={handleClick}
-          className="px-3 py-2 font-bold"
-        >
-          1
-        </button>
-      </li>
-      <li className="mx-1 bg-gray-200 text-primary rounded-lg">
-        <button
-          value={2}
-          onClick={handleClick}
-          className="px-3 py-2 font-bold"
-        >
-          2
-        </button>
-      </li>
-      <li className="mx-1 bg-gray-200 text-primary rounded-lg">
-        <button
-          value={3}
-          onClick={handleClick}
-          className="px-3 py-2 font-bold"
-        >
-          3
-        </button>
-      </li>
-      <li className="mx-1 bg-gray-200 text-primary rounded-lg">
-        <button className="px-3 py-2 flex items-center font-bold">
-          <span className="mx-1">Next</span>
-        </button>
-      </li>
-    </ul>
+    <div className="mt-24 flex justify-center">
+      {paginationRange.map((item, index) =>
+        Number.isInteger(item) ? (
+          <PaginationButton
+            key={item}
+            value={item}
+            handleClick={handleClick}
+          />
+        ) : (
+          <span key={`${item}-${paginationRange[index - 1]}`}>{item}</span>
+        )
+      )}
+    </div>
   );
 };
 

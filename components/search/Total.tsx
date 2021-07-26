@@ -1,7 +1,7 @@
-const Total: React.FC<{ count: number }> = ({ count }) => {
+const Total: React.FC<{ total: number }> = ({ total }) => {
   return (
     <h1 className="text-3xl font-semibold text-primary my-6 inline-block">
-      {count} results found
+      {total} results found
     </h1>
   );
 };
