@@ -9,14 +9,6 @@ const columns = [
     render: ({ resources }) => (resources && resources.length) || 0,
   },
   {
-    name: 'Size',
-    key: 'size',
-  },
-  {
-    name: 'Format',
-    key: 'format',
-  },
-  {
     name: 'Created',
     key: 'metadata_created',
   },
@@ -26,11 +18,15 @@ const columns = [
   },
   {
     name: 'License',
-    key: 'license',
+    key: 'license_title',
   },
   {
-    name: 'Source',
-    key: 'source',
+    name: 'Author',
+    key: 'author',
+  },
+  {
+    name: 'Maintainer',
+    key: 'maintainer',
   },
 ];
 

@@ -16,6 +16,10 @@ const columns = [
     ),
   },
   {
+    name: 'Description',
+    key: 'description',
+  },
+  {
     name: 'Format',
     key: 'format',
   },
@@ -41,9 +45,6 @@ const columns = [
 const Resources: React.FC<{ variables: any }> = ({ variables }) => {
   const { loading, error, data } = useQuery(GET_RESOURCES_QUERY, {
     variables,
-    // Setting this value to true will make the component rerender when
-    // the "networkStatus" changes, so we are able to know if it is fetching
-    // more data
     notifyOnNetworkStatusChange: true,
   });
 
