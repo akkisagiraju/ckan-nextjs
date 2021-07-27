@@ -18,7 +18,7 @@ const Table: React.FC<TableProps> = ({ columns, data, className }) => {
       </thead>
       <tbody>
         {data.map((item) => (
-          <tr key={item.id}>
+          <tr key={item.name}>
             {columns.map(({ key, render }) => (
               <td key={key} className="px-4 py-2">
                 {(render && typeof render === 'function' && render(item)) ||
