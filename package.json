@@ -7,7 +7,7 @@
     "test": "__tests__"
   },
   "scripts": {
-    "dev": "DMS=https://openbudgetsindia.org next dev",
+    "dev": "DMS=https://data.gov.sg next dev",
     "build": "next build",
     "start": "next start",
     "test": "jest",
@@ -34,6 +34,7 @@
     "d3": "^7.0.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-15": "^1.4.1",
+    "formik": "^2.2.9",
     "graphql": "^15.1.0",
     "graphql-anywhere": "^4.2.7",
     "graphql-tag": "^2.10.3",

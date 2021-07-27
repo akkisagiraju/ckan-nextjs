@@ -21,6 +21,7 @@
     "**/*.tsx",
     "setupTests.js",
     "jest.config.js",
-    "config/jest/cssTransform.js"
+    "config/jest/cssTransform.js",
+    "components/_shared/ChartBuilder.js"
   ]
 }
