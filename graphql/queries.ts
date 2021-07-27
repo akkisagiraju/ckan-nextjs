@@ -23,6 +23,9 @@ export const GET_DATAPACKAGE_QUERY = gql`
         size
         metadata_created
         metadata_modified
+        license_title
+        author
+        maintainer
         resources {
           name
         }
@@ -35,10 +38,12 @@ export const GET_RESOURCES_QUERY = gql`
   query dataset($id: String) {
     dataset(id: $id) @rest(type: "Response", path: "package_show?{args}") {
       result {
+        id
         name
         resources {
           name
           title
+          description
           url
           format
           created
@@ -150,9 +155,23 @@ export const GET_DATASET_QUERY = gql`
   query dataset($id: String) {
     dataset(id: $id) @rest(type: "Response", path: "package_show?{args}") {
       result {
+        id
         name
         title
         size
+        state
+        notes
+        private
+        tags
+        groups
+        license_id
+        license_title
+        owner_org
+        maintainer
+        maintainer_email
+        author
+        author_email
+        url
         metadata_created
         metadata_modified
         resources {
@@ -160,6 +179,7 @@ export const GET_DATASET_QUERY = gql`
           title
           format
           created
+          url
           last_modified
         }
         organization {

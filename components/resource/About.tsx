@@ -10,10 +10,6 @@ const columns = [
     render: ({ name, id }) => name || id,
   },
   {
-    name: 'Title',
-    key: 'title',
-  },
-  {
     name: 'Description',
     key: 'description',
   },

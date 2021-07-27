@@ -327,7 +327,6 @@ module.exports.convertToCkanSearchQuery = (query) => {
 
 module.exports.pagination = (c, m) => {
   let current = c,
-    last = m,
     delta = 2,
     left = current - delta,
     right = current + delta + 1,
