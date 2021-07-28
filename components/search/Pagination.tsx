@@ -1,21 +1,28 @@
 import { useRouter } from 'next/router';
 import React from 'react';
+import clsx from 'clsx';
 import utils from '../../utils';
 
 interface IPaginationButton {
   value: number;
+  active: boolean;
   handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const PaginationButton: React.FC<IPaginationButton> = ({
   value,
+  active,
   handleClick,
 }) => {
   return (
     <button
       value={value}
       onClick={handleClick}
-      className="px-3 py-2 mx-1 font-bold bg-gray-200 text-primary rounded-lg"
+      className={clsx(
+        'px-3 py-2 mx-1 font-bold rounded-lg',
+        { 'bg-primary text-gray-200': active },
+        { 'bg-gray-200 text-primary': !active }
+      )}
     >
       {value}
     </button>
@@ -48,6 +55,7 @@ const Pagination: React.FC<{ total: number }> = ({ total }) => {
           <PaginationButton
             key={item}
             value={item}
+            active={item === current}
             handleClick={handleClick}
           />
         ) : (
