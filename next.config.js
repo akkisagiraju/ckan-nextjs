@@ -1,41 +1,44 @@
 const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
+const path = require('path');
+// const withTM = require('next-transpile-modules')(['d3-fetch']);
+
+function generateIncludes(modules) {
+  return [
+    new RegExp(`(${modules.join('|')})$`),
+    new RegExp(`(${modules.join('|')})/(?!.*node_modules)`),
+  ];
+}
+
+const includes = generateIncludes(['d3', 'd3-dsv', 'd3-fetch']);
 
 module.exports = (phase, { defaultConfig }) => {
   const dms = process.env.DMS;
   const cms = process.env.CMS;
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     if (dms) {
-      console.log('\nYou are running the app in dev mode 🌀');
-      console.log(
-        'Did you know that you can use mocked CKAN API? Just unset your `DMS` env var.'
-      );
+      console.log('\nYou are running the app in dev mode');
       console.log('Happy coding ☀️\n');
-    } else {
-      const mocks = require('./mocks');
-      mocks.initMocks();
-      console.log(
-        '\nYou have not defined any DMS API so we are activating the mocks ⚠️'
-      );
-      console.log(
-        'If you wish to run against your CKAN API, you can set `DMS` env var.'
-      );
-      console.log(
-        'For example, to run against demo ckan site: `DMS=https://demo.ckan.org`\n'
-      );
     }
-
-    return {
-      i18n: {
-        locales: ['en', 'fr', 'nl-NL', 'te'],
-        defaultLocale: 'en',
-      },
-      publicRuntimeConfig: {
-        DMS: dms ? dms.replace(/\/?$/, '') : 'http://mock.ckan',
-        CMS: cms ? cms.replace(/\/?$/, '') : 'oddk.home.blog',
-      },
-    };
   }
   return {
+    ...defaultConfig,
+    webpack: (config, options) => {
+      config.externals = config.externals.map((external) => {
+        if (typeof external !== 'function') return external;
+        return (context, request, callback) => {
+          return includes.find((i) =>
+            i.test(
+              request.startsWith('.')
+                ? path.resolve(context, request)
+                : request
+            )
+          )
+            ? callback() // i.e., not an external
+            : external(context, request, callback);
+        };
+      });
+      return config;
+    },
     i18n: {
       locales: ['en', 'fr', 'nl-NL', 'te'],
       defaultLocale: 'en',

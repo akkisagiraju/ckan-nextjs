@@ -7,7 +7,7 @@
     "test": "__tests__"
   },
   "scripts": {
-    "dev": "DMS=https://data.gov.sg next dev",
+    "dev": "DMS=https://openbudgetsindia.org next dev",
     "build": "next build",
     "start": "next start",
     "test": "jest",
@@ -31,6 +31,7 @@
     "apollo-link-rest": "0.7.3",
     "apollo-server-testing": "^2.16.0",
     "bytes": "^3.1.0",
+    "clsx": "^1.1.1",
     "d3": "^7.0.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-15": "^1.4.1",
@@ -74,6 +75,7 @@
     "jest": "^26.1.0",
     "lerna": "^3.22.1",
     "lint-staged": ">=10",
+    "next-transpile-modules": "^8.0.0",
     "nock": "^12.0.3",
     "npm-run-all": "^4.1.5",
     "postcss-cli": "^7.1.1",
