@@ -6,15 +6,11 @@ import Nav from '../../../components/home/Nav';
 import About from '../../../components/dataset/About';
 import Org from '../../../components/dataset/Org';
 import Resources from '../../../components/dataset/Resources';
-import ChartBuilder from '../../../components/_shared/ChartBuilder';
+// import ChartBuilder from '../../../components/_shared/ChartBuilder';
 import { GET_DATASET_QUERY } from '../../../graphql/queries';
 import utils from '../../../utils/index';
 
-const Dataset: React.FC<{ variables: any; initialApolloState: any }> = ({
-  variables,
-  initialApolloState,
-}) => {
-  console.log(initialApolloState);
+const Dataset: React.FC<{ variables: any }> = ({ variables }) => {
   const { data, error, loading } = useQuery(GET_DATASET_QUERY, { variables });
 
   if (loading) return <div>Loading</div>;
@@ -25,8 +21,6 @@ const Dataset: React.FC<{ variables: any; initialApolloState: any }> = ({
   }
 
   const dataPackage = utils.ckanToDataPackage(data.dataset.result);
-
-  console.log(dataPackage);
 
   return (
     <div className="container mx-auto">
@@ -65,7 +59,7 @@ const Dataset: React.FC<{ variables: any; initialApolloState: any }> = ({
           <About variables={variables} />
         </div>
 
-        <ChartBuilder view={utils.prepareViews(dataPackage)} />
+        {/* <ChartBuilder view={utils.prepareViews(dataPackage)} /> */}
       </main>
     </div>
   );
@@ -81,8 +75,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     query: GET_DATASET_QUERY,
     variables,
   });
-
-  console.log(apolloClient.cache.extract());
 
   return {
     props: {
