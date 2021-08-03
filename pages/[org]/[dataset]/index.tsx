@@ -22,6 +22,8 @@ const Dataset: React.FC<{ variables: any }> = ({ variables }) => {
 
   const dataPackage = utils.ckanToDataPackage(data.dataset.result);
 
+  console.log(dataPackage);
+
   return (
     <div className="container mx-auto">
       <Head>

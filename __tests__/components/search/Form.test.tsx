@@ -13,11 +13,11 @@ test('📸 of Form component with empty', () => {
   expect(container).toMatchSnapshot();
 });
 
-test('📸 of Form component with query', () => {
-  useRouter.mockImplementationOnce(() => ({
-    query: { search: 'gdp', sort: '' },
-  }));
+// test('📸 of Form component with query', () => {
+//   useRouter.mockImplementationOnce(() => ({
+//     query: { search: 'gdp', sort: '' },
+//   }));
 
-  const { container } = render(<Form />);
-  expect(container).toMatchSnapshot();
-});
+//   const { container } = render(<Form />);
+//   expect(container).toMatchSnapshot();
+// });

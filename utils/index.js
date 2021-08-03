@@ -93,11 +93,6 @@ module.exports.ckanToDataPackage = function (descriptor) {
       resource.name = resource.id;
     }
 
-    if (resource.url) {
-      resource.path = resource.url;
-      delete resource.url;
-    }
-
     if (!resource.schema) {
       // If 'fields' property exists use it as schema fields
       if (resource.fields) {

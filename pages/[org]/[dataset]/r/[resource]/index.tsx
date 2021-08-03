@@ -1,21 +1,37 @@
+import React from 'react';
 import { GetServerSideProps } from 'next';
 import { useQuery } from '@apollo/react-hooks';
 import Head from 'next/head';
 import { initializeApollo } from '../../../../../lib/apolloClient';
 import Nav from '../../../../../components/home/Nav';
 import About from '../../../../../components/resource/About';
-import DataExplorer from '../../../../../components/resource/DataExplorer';
 import { GET_RESOURCES_QUERY } from '../../../../../graphql/queries';
+import ResourceVisualizer, {
+  IResource,
+} from '../../../../../components/viz/ResourceVisualizer';
+import { resourceGetter } from '../../../../../utils/resourceParser';
 
-const Resource: React.FC<{ variables: any }> = ({ variables }) => {
+const ResourcePage: React.FC<{ variables: any }> = ({ variables }) => {
   const { data, loading } = useQuery(GET_RESOURCES_QUERY, { variables });
 
+  // const [resourceData, setResourceData] = React.useState<any[]>[{}];
+
   if (loading) return <div>Loading</div>;
+
   const result = data.dataset.result;
-  // Find right resource
-  const resource = result.resources.find(
+  const resource: IResource = result.resources.find(
     (item) => item.name === variables.resource
   );
+
+  // React.useEffect(() => {
+
+  //   const getData = async () => {
+  //     const data = await resourceGetter(resource.url, resource.format);
+  //     setResourceData(data.slice(0, 10));
+  //   };
+
+  //   getData();
+  // });
 
   return (
     <div className="container mx-auto">
@@ -37,7 +53,8 @@ const Resource: React.FC<{ variables: any }> = ({ variables }) => {
             className="w-2/3 mx-auto"
           ></iframe>
         ) : (
-          <DataExplorer variables={variables} />
+          <></>
+          // <ResourceVisualizer resourceData={resourceData} />
         )}
       </main>
     </div>
@@ -64,4 +81,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default Resource;
+export default ResourcePage;
